@@ -3,3 +3,4 @@ Pillow
 geocoder
 feedparser
 requests
+streamlit-lottie
