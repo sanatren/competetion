@@ -23,13 +23,16 @@ def load_lottieurl(url: str):
         return None
 
 # Example Lottie animation URLs (you can replace these with your own)
-LOTTIE_RECYCLING_URL = "https://assets9.lottiefiles.com/packages/lf20_mrux7npx.json"
-LOTTIE_UPLOAD_URL = "https://assets5.lottiefiles.com/packages/lf20_qmfs6zdh.json"
+LOTTIE_RECYCLING_URL = "https://lottie.host/65119e8e-f82c-4b53-b613-16096eb36a8e/Yrn7AjQUNK.json"
+LOTTIE_UPLOAD_URL = "https://lottie.host/f5326758-f0e1-4cdc-b702-b60760d5a86f/95NWTtRHVm.json"
+
+# Get the API key from the environment
+api_key = os.getenv("API_KEY")
+if not api_key:
+    raise ValueError("API_KEY not found. Please set it in the .env file or as an environment variable.")
 
 # Configure the Generative AI API
-os.environ["API_KEY"] = "HeyUseYourApi"
-genai.configure(api_key=os.environ["API_KEY"])
-
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 RECYCLING_RULES = {
@@ -39,7 +42,60 @@ RECYCLING_RULES = {
         "E-waste should be disposed of through authorized e-waste collection centers.",
         "Use bins provided by local authorities for proper segregation."
     ],
-    # Add more states or location-based rules as desired...
+    "Delhi": [
+        "Use separate bins for dry waste (plastic, paper, metal) and wet waste (food scraps).",
+        "Compost kitchen waste to reduce landfill burden.",
+        "Recycle paper products and avoid mixing recyclables with non-recyclables.",
+        "Participate in local clean-up drives and awareness programs."
+    ],
+    "Karnataka": [
+        "Sort waste into dry and wet categories at home before disposal.",
+        "Use designated collection bins for e-waste and ensure safe disposal.",
+        "Encourage local recycling initiatives and community clean-ups.",
+        "Ensure that plastic containers are rinsed and cleaned before recycling."
+    ],
+    "Tamil Nadu": [
+        "Rinse all plastic bottles and containers before disposal.",
+        "Separate recyclable materials (metals, plastics, paper) from non-recyclables.",
+        "Participate in local waste segregation workshops.",
+        "Avoid single-use plastics and prefer biodegradable options."
+    ],
+    "West Bengal": [
+        "Recyclables should be clean and dry; food residue can contaminate materials.",
+        "E-waste must be collected and disposed of through authorized channels.",
+        "Use community recycling drives to promote awareness.",
+        "Segregate hazardous waste (batteries, chemicals) separately."
+    ],
+    "Gujarat": [
+        "Flatten cardboard boxes to save space in recycling bins.",
+        "Avoid the use of plastic bags; use cloth bags instead.",
+        "Participate in local recycling programs and educational initiatives.",
+        "Dispose of electronic waste at designated centers only."
+    ],
+    "Rajasthan": [
+        "Source segregation of waste into biodegradable and non-biodegradable materials.",
+        "Participate in community awareness programs about recycling.",
+        "Ensure waste is dry and clean before disposal in recycling bins.",
+        "Compost organic waste at home to reduce landfill use."
+    ],
+    "Andhra Pradesh": [
+        "Recyclables should be kept dry; wet items can lead to contamination.",
+        "Follow local guidelines for electronic waste disposal.",
+        "Engage in community-led recycling efforts and campaigns.",
+        "Avoid mixing recyclables with general waste."
+    ],
+    "Telangana": [
+        "Use separate bins for recyclables and ensure they are clean.",
+        "Participate in local recycling drives and educational workshops.",
+        "Check with local authorities about e-waste collection schedules.",
+        "Be aware of local regulations regarding hazardous waste disposal."
+    ],
+    "Uttar Pradesh": [
+        "Sort waste at home into recyclables and non-recyclables.",
+        "Consult local agencies for the proper disposal of hazardous materials.",
+        "Participate in community initiatives for waste management and recycling.",
+        "Use recyclable materials wherever possible to reduce waste."
+    ]
 }
 
 class LocationService:
